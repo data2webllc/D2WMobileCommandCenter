@@ -1,0 +1,15 @@
+{
+  "name": "d2wmobilecommandcenter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@types/googlemaps": "^3.30.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Henry Petersen",
+  "license": "MIT"
+}

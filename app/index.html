@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="D2WMobileCommandCenter">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+        <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
+        <link rel="stylesheet" href="./bower_components/angular-material-icons/angular-material-icons.css"/>
+        <link rel="stylesheet" href="./assets/app.css"/>
+        <link rel="stylesheet" href="./assets/split-pane.css" />
+        <link rel="stylesheet" href="./assets/pretty-split-pane.css" />
+    
+        <style type="text/css">
+            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+              display: none !important;
+            }
+
+            .st-selected{
+                background:#216eff !important;
+                color: white !important;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body ng-cloak ng-controller="mainController as vm">
+        <md-toolbar>
+            <div class="md-toolbar-tools" style="display:flex; position:relative; justify-content:space-around">
+                <div style="width:25%">
+                    <md-button style="position:relative" ng-click="vm.addWork($event)">Add Work</md-button>
+                    <md-button style="position:relative" ng-click="vm.openMap($event)">Show Map</md-button>
+                </div>
+                <div  style="width:50%; text-align: center; margin:0 auto; position:relative;">
+                    <h2>
+                        D2W Mobile Command Center
+                    </h2>
+                </div>
+                <div style="width:25%"></div>
+            </div>
+        </md-toolbar>
+        <div layout="row" layout-sm="column" layout-align="space-around" style="position: absolute;bottom:1%;height:2000px;width:100%">
+            <md-progress-circular md-mode="indeterminate" ng-show="vm.usersLoading" style="position:fixed;bottom:50%" ></md-progress-circular>
+        </div>
+        <div layout="row" layout-sm="column" layout-align="space-around" style="position: absolute;bottom:1%;height:2000px;width:100%">
+            <md-progress-circular md-mode="indeterminate" ng-show="vm.workLoading" style="position:fixed;bottom:50%" ></md-progress-circular>
+        </div>
+        <div split-pane>
+            <div split-pane-component class="pane1">
+                <table st-table="vm.displayUsers" st-safe-src="vm.safeUsers" class="table table-striped" style="width:100%;" >
+                    <thead>
+                        <tr>
+                            <th st-sort="idUser">User ID</th>
+                            <th st-sort="txFullName">User Name</th>
+                            <th st-sort="txCurrentStatus">Status</th>
+                            <th>Last Latitude</th>
+                            <th>Last Longitude</th>
+                            <th>Last Ping</th>
+                            <th st-sort="idApplication">Application</th>
+                            <th st-sort="idWork">Work ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr st-select-row="user" ng-repeat="user in vm.displayUsers" ui-on-Drop="vm.onDrop($event, $data, user)">
+                            <td>{{user.idUser}}</td>
+                            <td>{{user.txFullName}}</td>
+                            <td>{{user.txCurrentStatus}}</td>
+                            <td>{{user.decLastLat}}</td>
+                            <td>{{user.decLastLong}}</td>
+                            <td>{{user.decLastPing}}</td>
+                            <td>{{user.idApplication}}</td>
+                            <td>{{user.idWork}}</td>
+                        </tr>
+                    </tbody>
+                </table>            
+            </div>
+            <div split-pane-divider data-height="1px"></div>
+            <div split-pane-component data-height="50%" class="pane2">
+                <table st-table="vm.displayWork" st-safe-src="vm.safeWork" class="table table-striped" style="width:100%; font-size: small;" >
+                    <thead>
+                        <tr>
+                            <th st-sort="idWork">ID</th>
+                            <th st-sort="txApplication">Application</th>
+                            <th st-sort="txWorkType">Work Type</th>
+                            <th st-sort="idApplicationWork">Application ID</th>
+                            <th st-sort="dtDue">Due Date</th>
+                            <th st-sort="txCurrentStatus">Status</th>
+                            <th st-sort="tsCurrentStatus">Timestamp</th>
+                            <th st-sort="txCurrentUser">Assigned To</th>
+                            <th st-sort="txWorkAddress1">Address1</th>
+                            <th st-sort="txWorkAddress2">Address2</th>
+                            <th st-sort="txCity">City</th>
+                            <th st-sort="txState">State</th>
+                            <th st-sort="txZipCode">Zip</th>
+                            <th st-sort="txCrossStreet1">Cross Street</th>
+                            <th st-sort="txCrossStreet2">Cross Street</th>
+                            <th st-sort="decLatitude">Latitude</th>
+                            <th st-sort="decLongitude">Longitude</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr st-select-row="work" ng-repeat="work in vm.displayWork track by $index" ui-draggable="true" drag="work" on-drop-success="vm.dropSuccessHandler($event, $index, work)">
+                            <td>{{work.idWork}}</td>
+                            <td>{{work.txApplication}}</td>
+                            <td>{{work.txWorkType}}</td>
+                            <td>{{work.idApplicationWork}}</td>
+                            <td>{{work.dtDue | date:'MM/dd/yyyy'}}</td>
+                            <td>{{work.txCurrentStatus }}</td>
+                            <td>{{work.tsCurrentStatus | date:'MM/dd/yyyy hh:mm'}}</td>
+                            <td>{{work.txCurrentUser}}</td>
+                            <td>{{work.txWorkAddress1}}</td>
+                            <td>{{work.txWorkAddress2}}</td>
+                            <td>{{work.txCity}}</td>                            
+                            <td>{{work.txState}}</td>  
+                            <td>{{work.txZipCode}}</td>  
+                            <td>{{work.txCrossStreet1}}</td>  
+                            <td>{{work.txCrossStreet2}}</td> 
+                            <td>{{work.txLatitude}}</td> 
+                            <td>{{work.txLongitude}}</td> 
+                        </tr>
+                    </tbody>
+                </table>                
+            </div>
+        </div>
+        <!--<div ng-include="'dist/view/main-content.html'"></div>-->
+
+        <script src="./bower_components/jquery/dist/jquery.min.js"></script>         
+        <script src="./bower_components/angular/angular.js"></script>
+        <script src="./bower_components/angular-animate/angular-animate.js"></script>
+        <script src="./bower_components/angular-aria/angular-aria.js"></script>
+        <script src="./bower_components/angular-material/angular-material.js"></script>  
+        <script src="./bower_components/angular-messages/angular-messages.js"></script>
+        <script src="./bower_components/angular-native-dragdrop/draganddrop.js"></script>
+        
+        <script src="./dist/split-pane/split-pane.js"></script>
+        <script src="./dist/angular-split-pane/angular-split-pane.js"></script>
+        <script src="./bower_components/smart-table/smart-table.js"></script>  
+
+        <script src="./dist/models.js"></script>
+        <script src="./dist/services/userService.js"></script>
+        <script src="./dist/services/workService.js"></script>
+        <script src="./dist/controllers/addWorkDialogController.js"></script>
+        <script src="./dist/controllers/mainController.js"></script>
+        <script src="./dist/boot.js"></script>
+    </body>
+</html>

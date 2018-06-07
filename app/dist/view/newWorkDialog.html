@@ -1,0 +1,115 @@
+<md-dialog style="width:50%">
+    <form name="workForm" ng-submit="workController.save()">
+        <md-dialog-content>
+            <div layout="row" layout-padding>
+                <div layout-gt-sm="column" style="width:50%">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <md-select ng-model="workController.work.idWorkType" name="idWorkType" placeholder="Work Type" required>
+                            <md-option ng-repeat="workType in workController.workTypes" value="{{workType.idWorkType}}">{{workType.description}}</md-option>
+                        </md-select>
+                        <div ng-messages="workForm.idWorkType.$error">
+                        <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <md-select ng-model="workController.work.idApplication" name="idApplication" placeholder="Application" required>
+                            <md-option ng-repeat="application in workController.applicationMasters" value="{{application.idApplication}}">{{application.txApplication}}</md-option>                            
+                        </md-select>
+                        <div ng-messages="workForm.idApplication.$error">
+                        <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Application ID</label>
+                        <input ng-model="workController.work.idApplicationWork" name="idApplicationWork" required>
+                        <div ng-messages="workForm.idApplicationWork.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Due Date</label>
+                        <md-datepicker ng-model="workController.work.dtDue" name="dtDue" required>
+                        <div ng-messages="workForm.dtDue.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <md-select ng-model="workController.work.idCurrentUser" name="idCurrentUser" placeholder="Field Technician">
+                            <md-option  ng-repeat="user in workController.users" value="{{user.id}}">{{user.txFullName}}</md-option>                            
+                        </md-select>
+                        <div ng-messages="workForm.idCurrentUser.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Latitude</label>
+                        <input ng-model="workController.work.txLatitude" name="txLatitude">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Longitude</label>
+                        <input ng-model="workController.work.txLongitude" name="txLongitude">
+                    </md-input-container>              
+                </div>
+                <div layout-gt-sm="column" style="width:50%">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Work Address 1</label>
+                        <input ng-model="workController.work.txWorkAddress1" name="txWorkAddress1" required>
+                        <div ng-messages="workForm.txWorkAddress1.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Work Address 2</label>
+                        <input ng-model="workController.work.txWorkAddress2" name="txWorkAddress2">
+                        <div ng-messages="workForm.txWorkAddress2.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>City/Town</label>
+                        <input ng-model="workController.work.txCity" name="txCity" required>
+                        <div ng-messages="workForm.txCity.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                            <label>State</label>
+                            <input ng-model="workController.work.txState" name="txState" required>
+                            <div ng-messages="workForm.txState.$error">
+                                <div ng-message="required">This is required.</div>
+                            </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Zip Code</label>
+                        <input ng-model="workController.work.txZipCode" name="txZipCode" required md-maxlength=5>
+                        <div ng-messages="workForm.txZipCode.$error">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="md-maxlength">Max Length = 5.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Cross Street 1</label>
+                        <input ng-model="workController.work.txCrossStreet1" name="txCrossStreet1" required>
+                        <div ng-messages="workForm.txCrossStreet1.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Cross Street 2</label>
+                        <input ng-model="workController.work.txCrossStreet2" name="txCrossStreet2">
+                        </md-input-container>
+                </div>
+            </div>
+        </md-dialog-content>
+  
+        <md-dialog-actions layout="row">      
+            <md-button ng-click="workController.cancel()">
+            Cancel
+            </md-button>
+            <md-button type="submit" class="md-primary md-raised"
+                    ng-disabled="workForm.$invalid">
+            Save
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
