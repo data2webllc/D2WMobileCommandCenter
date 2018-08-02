@@ -1,30 +1,24 @@
-/// <reference path="../_all.ts" />
+/// <reference path="../_allMap.ts" />
 var D2WMobileCommandCenterMapApp;
 (function (D2WMobileCommandCenterMapApp) {
     var MainMapController = /** @class */ (function () {
-        function MainMapController($mdDialog, $mdMedia, $mdToast, $window) {
-            this.$mdDialog = $mdDialog;
-            this.$mdMedia = $mdMedia;
-            this.$mdToast = $mdToast;
-            this.$window = $window;
+        function MainMapController(
+        //private myMap: ngMap;
+        ) {
             var self = this;
+            self.name = "MainMapController";
+            self.options = {
+                center: { lat: 41.0362643, lng: -74.3704765 },
+                scrollwheel: false,
+                zoom: 8
+            };
+            var mapElement = document.getElementById('map');
+            self.map = new google.maps.Map(mapElement, self.options);
         }
         MainMapController.prototype.getGPS = function () {
             var self = this;
         };
-        //write message to screen
-        MainMapController.prototype.openToast = function (message) {
-            this.$mdToast.show(this.$mdToast.simple()
-                .textContent(message)
-                .position('top right')
-                .hideDelay(3000));
-        };
-        MainMapController.$inject = [
-            '$mdDialog',
-            '$mdMedia',
-            '$mdToast',
-            '$window'
-        ];
+        MainMapController.$inject = ['ngMap'];
         return MainMapController;
     }());
     D2WMobileCommandCenterMapApp.MainMapController = MainMapController;

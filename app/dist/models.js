@@ -24,11 +24,12 @@ var D2WMobileCommandCenterApp;
     }());
     D2WMobileCommandCenterApp.User = User;
     var Work = /** @class */ (function () {
-        function Work(idWork, idWorkType, txWorkType, deleted, idApplication, txApplication, idApplicationWork, tsCreated, dtDue, cdCurrentStatus, txCurrentStatus, tsCurrentStatus, idCurrentUser, txCurrentUser, txWorkAddress1, txWorkAddress2, txCity, txState, txZipCode, txZipCodeExtra, txCrossStreet1, txCrossStreet2, txLatitude, txLongitude) {
+        function Work(updatedAt, deleted, idWork, idWorkType, txWorkType, idApplication, txApplication, idApplicationWork, tsCreated, dtDue, cdCurrentStatus, txCurrentStatus, tsCurrentStatus, idCurrentUser, txCurrentUser, txWorkAddress1, txWorkAddress2, txCity, txState, txZipCode, txZipCodeExtra, txCrossStreet1, txCrossStreet2, txLatitude, txLongitude) {
+            this.updatedAt = updatedAt;
+            this.deleted = deleted;
             this.idWork = idWork;
             this.idWorkType = idWorkType;
             this.txWorkType = txWorkType;
-            this.deleted = deleted;
             this.idApplication = idApplication;
             this.txApplication = txApplication;
             this.idApplicationWork = idApplicationWork;

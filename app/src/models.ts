@@ -25,10 +25,11 @@ module D2WMobileCommandCenterApp {
     
     export class Work {
       constructor(
+        public updatedAt: string,
+        public deleted: Boolean,
         public idWork: number,
         public idWorkType: number,
         public txWorkType: string, 
-        public deleted: Boolean,
         public idApplication: string,
         public txApplication: string,
         public idApplicationWork: string,

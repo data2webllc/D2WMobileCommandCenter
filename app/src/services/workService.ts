@@ -16,6 +16,9 @@ module D2WMobileCommandCenterApp {
     export class WorkService implements IWorkService {
         static $inject = ['$http'];
         
+        private serverUrl = "http://localhost:53077/";
+        //private serverUrl = "http://d2wmobile.azurewebsites.net/";
+        
         constructor(private $http: ng.IHttpService) {    
 
         }
@@ -23,7 +26,7 @@ module D2WMobileCommandCenterApp {
         selectedWork: Work = null;
       
         loadAllWork() : ng.IPromise<Work[]> {
-            var results: ng.IPromise< any > = this.$http.get( 'http://localhost:53077/api/WorkMasterCurrentWorkList')
+            var results: ng.IPromise< any > = this.$http.get( this.serverUrl + '/api/WorkMasterCurrentWorkList')
             .then( 
                 ( response: any ) : ng.IPromise< any > => response.data 
                 );
@@ -31,7 +34,7 @@ module D2WMobileCommandCenterApp {
         }
 
         loadAllWorkTypes() : ng.IPromise<WorkType[]> {
-            var results: ng.IPromise< any > = this.$http.get( 'http://localhost:53077/api/WorkType', { cache: true })
+            var results: ng.IPromise< any > = this.$http.get( this.serverUrl + '/api/WorkType', { cache: true })
             .then( 
                 ( response: any ) : ng.IPromise< any > => response.data 
             );
@@ -47,7 +50,7 @@ module D2WMobileCommandCenterApp {
         }
        
         loadAllUsers() : ng.IPromise<User[]> {
-            var results: ng.IPromise< any > = this.$http.get( 'http://localhost:53077/api/PeopleFieldUser', { cache: true })
+            var results: ng.IPromise< any > = this.$http.get( this.serverUrl + '/api/PeopleFieldUser', { cache: true })
             .then( 
                 ( response: any ) : ng.IPromise< any > => response.data 
               );
@@ -55,7 +58,7 @@ module D2WMobileCommandCenterApp {
         }
 
         postWork(work : Work ) : ng.IPromise< any > {
-            var results: ng.IPromise< any > = this.$http.post( 'http://localhost:53077/api/WorkMaster', work)
+            var results: ng.IPromise< any > = this.$http.post( this.serverUrl + '/api/WorkMaster', work)
             .then( 
                 ( response: any ) : ng.IPromise< any > => response
             )
@@ -66,7 +69,7 @@ module D2WMobileCommandCenterApp {
         }
 
         putWork(work : Work ) : ng.IPromise< any > {
-            var results: ng.IPromise< any > = this.$http.put( 'http://localhost:53077/api/WorkMaster', work)
+            var results: ng.IPromise< any > = this.$http.put( this.serverUrl + '/api/WorkMaster', work)
             .then( 
                 ( response: any ) : ng.IPromise< any > => response
             )
@@ -77,7 +80,7 @@ module D2WMobileCommandCenterApp {
         }
 
         getGPS() : ng.IPromise< any > {
-            var results: ng.IPromise< any > = this.$http.get('http://localhost:53077/api/WorkMasterCurrentWorkLocationList')
+            var results: ng.IPromise< any > = this.$http.get( this.serverUrl + '/api/WorkMasterCurrentWorkLocationList')
             .then(
                 (response: any) : ng.IPromise< any > => response.data
             );

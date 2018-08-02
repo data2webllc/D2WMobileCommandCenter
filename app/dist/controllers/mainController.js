@@ -29,6 +29,18 @@ var D2WMobileCommandCenterApp;
                 self.displayWork = work;
                 self.safeWork = work;
                 self.workLoading = false;
+                self.workLastUpdated = '';
+                for (var index in work) {
+                    var item = work[index];
+                    if (self.workLastUpdated == '') {
+                        self.workLastUpdated = item.updatedAt;
+                    }
+                    else {
+                        if (self.workLastUpdated < item.updatedAt) {
+                            self.workLastUpdated = item.updatedAt;
+                        }
+                    }
+                }
             });
         }
         MainController.prototype.addWork = function ($event) {

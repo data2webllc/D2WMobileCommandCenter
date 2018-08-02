@@ -4,10 +4,12 @@ var D2WMobileCommandCenterApp;
     var UserService = /** @class */ (function () {
         function UserService($http) {
             this.$http = $http;
+            //private serverUrl = "http://localhost:53077/";
+            this.serverUrl = "http://d2wmobile.azurewebsites.net/";
             this.selectedUser = null;
         }
         UserService.prototype.loadAllUsers = function () {
-            var results = this.$http.get('http://localhost:53077/api/PeopleFieldUser')
+            var results = this.$http.get(this.serverUrl + '/api/PeopleFieldUser')
                 .then(function (response) { return response.data; });
             return results;
         };
