@@ -42,7 +42,7 @@ module D2WMobileCommandCenterApp {
         }
         
         loadAllApplicationMasters() : ng.IPromise<ApplicationMaster[]> {
-            var results: ng.IPromise< any > = this.$http.get( 'http://localhost:53077/api/ApplicationMaster', { cache: true })
+            var results: ng.IPromise< any > = this.$http.get(  this.serverUrl + '/api/ApplicationMaster', { cache: true })
             .then( 
                 ( response: any ) : ng.IPromise< any > => response.data 
             );
