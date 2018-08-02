@@ -2,10 +2,10 @@
 var D2WMobileCommandCenterApp;
 (function (D2WMobileCommandCenterApp) {
     var WorkService = /** @class */ (function () {
-        //private serverUrl = "http://d2wmobile.azurewebsites.net/";
         function WorkService($http) {
             this.$http = $http;
-            this.serverUrl = "http://localhost:53077/";
+            //private serverUrl = "http://localhost:53077/";
+            this.serverUrl = "http://d2wmobile.azurewebsites.net/";
             this.selectedWork = null;
         }
         WorkService.prototype.loadAllWork = function () {
@@ -19,7 +19,7 @@ var D2WMobileCommandCenterApp;
             return results;
         };
         WorkService.prototype.loadAllApplicationMasters = function () {
-            var results = this.$http.get('http://localhost:53077/api/ApplicationMaster', { cache: true })
+            var results = this.$http.get(this.serverUrl + '/api/ApplicationMaster', { cache: true })
                 .then(function (response) { return response.data; });
             return results;
         };
