@@ -16,8 +16,8 @@ module D2WMobileCommandCenterApp {
     export class WorkService implements IWorkService {
         static $inject = ['$http'];
         
-        private serverUrl = "http://localhost:53077/";
-        //private serverUrl = "http://d2wmobile.azurewebsites.net/";
+        //private serverUrl = "http://localhost:53077/";
+        private serverUrl = "http://d2wmobile.azurewebsites.net/";
         
         constructor(private $http: ng.IHttpService) {    
 
